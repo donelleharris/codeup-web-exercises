@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register With Us</title>
+</head>
+<body>
+    <h1>Veridian Dynamics Registration</h1>
+    <form method="POST" action="https://request-inspector.glitch.me/">
+<!--<form method="POST" action="https://www.elformo.com/forms/9953d2c3-619f-47bd-9160-ccc7a596cbda">-->
+    <div>
+        <label for="email">Please enter your email address:</label>
+         <input type="email" id="email" name="email">
+    </div>
+    <div>
+    <label for="password">Please create a password:  </label>
+    <input type="password" id="password" name="password">
+    </div>
+    <br>
+    <div>
+    <label for="bio">About you:</label> <br>
+    <textarea name="bio" id="bio" cols="30" rows="10" placeholder="Tell us about you..."></textarea> <br>
+    </div>
+    <div>
+    <label for="referred">How did you hear about us?</label> <br>
+    <input type="radio" name="referred1" value="billboard">Billboard<br>
+    <input type="radio" name="referred2" value="radio">Radio advertisement<br>
+    <input type="radio" name="referred3" value="internet">Internet search<br>
+    <input type="radio" name="referred4" value="other">Other<br>
+    <input type="text" name="referred4_other"> <br><br>
+    </div>
+    <div>
+    <label for="browser">Which web browser are you using?</label>
+    <select name="browser_used" id="browser">
+        <option value="select">Select</option>
+        <option value="chrome">Chrome</option>
+        <option value="safari">Safari</option>
+        <option value="firefox">Mozilla Firefox</option>
+        <option value="ie">Internet Explorer</option>
+        <option value="other">Other</option>
+    </select>
+    </div>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
