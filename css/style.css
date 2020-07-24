@@ -1,4 +1,83 @@
-.fancy-header {
-    color: purple; /* single line comment */
-    text-decoration: underline;
+body {
+    margin: 20px 60px 60px 60px;
+    background: #bbc4c4;
+    background-image: url("../img/grey-wall-2117937.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: 'Anton', sans-serif;
+    color: #264458;
 }
+header {
+    padding: 20px;
+    background-color: lightgray;
+}
+hr {
+    border: 1px solid #122a3a;
+}
+#top {
+    text-align: center;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: underline;
+    color: 	#122a3a;
+}
+ul {
+    list-style-type: circle;
+    list-style-position: outside;
+}
+ol {
+    list-style-type:lower-roman;
+    list-style-position: outside
+}
+
+img {
+    border: solid #bbc4c4 4px;
+    border-radius: 10px;
+}
+.pricing {
+    border: solid #122a3a 2px;
+    background: #bbc4c4;
+
+}
+th {
+    border: solid #122a3a 2px;
+    font-weight: bolder;
+    font-size: 2em;
+    padding: 5px;
+
+}
+td {
+    border: solid #122a3a 2px;
+    font-weight: lighter;
+    font-size: 1em;
+    padding: 5px;
+    text-align: center;
+}
+td:nth-child(3) {
+    text-align: left;
+}
+/* unvisited link */
+a:link {
+    text-decoration: none;
+    color: #122a3a;
+}
+
+/* visited link */
+a:visited {
+    color: #bbc4c4;
+}
+
+/* mouse over link */
+a:hover {
+    color: 	#4b7393;
+}
+
+/*#basic_selectors, .fancy-header {*/
+/*    font-weight: bolder;*/
+/*    text-decoration: underline;*/
+/*}*/
+/*section h1 {*/
+/*    color: aqua;*/
+/*    font-weight: lighter;*/
+/*}*/
