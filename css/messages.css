@@ -5,26 +5,36 @@ body, html {
     margin: 0;
     font-family: Arial, Ubuntu, sans-serif;
 }
+:root {
+    --bg-info: #cddefd;
+    --text-info: #3a3194;
+    --bg-success: #cff3da;
+    --text-success: #277c4b;
+    --bg-warning: #fcfbc9;
+    --text-warning: #AB9B4B;
+    --bg-error: #fad3d7;
+    --text-error: #D21D32;
+}
 .message {
     border: solid 1px #dfe0e0;
-    border-radius: 4px;
-    padding: 5px;
-    margin-top: .5em;
-    margin-bottom: .5em;
+    border-radius: .35em;
+    padding: .5em;
+    margin: .5em auto;
+    width: 95%;
 }
 .message-info {
-    background-color: #cddefd;
-    color: #3a3194;
+    background-color: var(--bg-info);
+    color: var(--text-info)
 }
 .message-success {
-    background-color: #cff3da;
-    color: #277c4b;
+    background-color: var(--bg-success);
+    color: var(--text-success);
 }
 .message-warning {
-    background-color: #fcfbc9;
-    color: #AB9B4B;
+    background-color: var(--bg-warning);
+    color: var(--text-warning);
 }
 .message-error {
-    background-color: #fad3d7;
-    color: #821D32;
+    background-color: var(--bg-error);
+    color: var(--text-error);
 }
