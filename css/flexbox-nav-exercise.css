@@ -1,13 +1,13 @@
+
 * {
     box-sizing: border-box;
-}
-body {
     margin: 0;
 }
-nav {
+
+.container {
     background-color: lightgray;
 }
-ul {
+.nav-link {
     display: flex;
     list-style: none;
     padding: 0;
@@ -16,7 +16,7 @@ ul {
     align-items: center;
     position: relative;
 }
-nav a {
+.nav-item a {
     display: inline-block;
     flex-grow: 1;
     text-decoration: none;
@@ -24,14 +24,22 @@ nav a {
     font-family: 'Work Sans', sans-serif;
     font-size: 1em;
     margin: 0 5px;
+    padding: 1vw;
 }
-nav a:hover {
+.nav-item a:hover {
     color: blue;
     background: lightgray;
 }
-.logo {
+.nav-item:nth-child(5) {
+    position: absolute;
+    left: calc(50% - 2vw);
+}
+.nav-item:nth-child(6) {
+    margin-left: auto;
+}
+#logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: 3em;
+    font-size: 3vw;
     padding: .2em 0;
     margin: auto;
 }
