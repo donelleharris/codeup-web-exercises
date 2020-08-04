@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+.form-inline {
+    flex-grow: 2;
+}
+
+.jumbotron {
+    background-image: url("../img/pizza.png");
+    text-align: center;
+}
+.jumbotron h1 {
+    background-color: white;
+    opacity: .5;
+}
+
