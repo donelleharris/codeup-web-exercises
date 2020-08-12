@@ -9,9 +9,9 @@
  * > sayHello("codeup") // returns "Hello, codeup!"
  */
 function sayHello(name) {
-    console.log("Hello, " + name)
+    var message = "Hello, " + name + "!";
+    return message;
 }
-sayHello("codeup")
 /**
  * TODO:
  * Call the function 'sayHello' and pass your name as a string literal argument.
@@ -76,7 +76,7 @@ function calculateTip(bill, tip){
     return bill * (tip/100);
 }
 calculateTip(20,10);
-console.log(calculateTip(100,10));
+
 /**
  * TODO:
  * Use prompt and alert in combination with your calculateTip function to
@@ -105,8 +105,7 @@ alert("Your tip should be: $" + calculateTip(billTotal, tipPercentage));
 var originalPrice = 100;
 var discountPercent = .2;
 function applyDiscount(price, discount){
-    return price * discount;
+    return price - (price * discount);
 }
 
 console.log(applyDiscount(originalPrice, discountPercent));
-
