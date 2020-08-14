@@ -50,6 +50,19 @@ analyzeColor(randomColor);
  * Refactor your above function to use a switch-case statement
  */
 
+switch (randomColor){
+    case "blue":
+        alert("blue is the color of the sky")
+        break;
+    case "red":
+        alert("strawberries are red")
+        break;
+    case "cyan":
+        alert("I don't know anything about cyan")
+        break;
+    default:
+        alert("I don't know that color")
+}
 /**
  * TODO:
  * Prompt the user for a color when the page loads, and pass the input from the
@@ -57,6 +70,19 @@ analyzeColor(randomColor);
  * function to show it to the user.
  */
 
+function analyzeColor(color){
+    var color = prompt("What is your favorite color?")
+    if(color === 'blue'){
+        alert("blue is the color of the sky")
+    } else if(color === 'red'){
+        alert("strawberries are red")
+    } else if(color === 'cyan'){
+        alert("I don't know anything about cyan")
+    } else {
+        alert("I don't know that color")
+    }
+}
+analyzeColor();
 /* ########################################################################## */
 
 /**
@@ -79,6 +105,41 @@ analyzeColor(randomColor);
  * return value.
  */
 
+var discount;
+var totalBill;
+function calculateTotal(luckyNumber, totalAmount){
+    switch (luckyNumber){
+        case 0:
+            totalBill = totalAmount;
+            alert("Sorry, no discount today. Your total is: $" + totalBill + ".00")
+            break;
+        case 1:
+            discount = .10;
+            totalBill = totalAmount - (totalAmount * discount);
+            alert("You get a 10% discount today! Your new total is: $" + totalBill + ".00")
+            break;
+        case 2:
+            discount = .20;
+            totalBill = totalAmount - (totalAmount * discount);
+            alert("You get a 20% discount today! Your new total is: $" + totalBill + ".00")
+            break;
+        case 3:
+            discount = .33
+            totalBill = totalAmount - (totalAmount * discount);
+            alert("You get a 33% discount today! Your new total is: $" + totalBill + ".00")
+            break;
+        case 4:
+            discount = .50
+            totalBill = totalAmount - (totalAmount * discount);
+            alert("You get a 50% discount today! Your new total is: $" + totalBill + ".00")
+            break;
+        case 5:
+            totalBill = 0
+            alert("You get a 100% discount today! Your new total is: $" + totalBill + ".00")
+
+    }
+}
+calculateTotal(2,100);
 /**
  * TODO:
  * Uncomment the line below to generate a random number between 0 and 6.
@@ -86,9 +147,45 @@ analyzeColor(randomColor);
  * and alerts to display to the user what their lucky number was, what their
  * price before the discount was, and what their price after the discount is.
  */
-// Generate a random number between 0 and 6
-// var luckyNumber = Math.floor(Math.random() * 6);
 
+var luckyNumber = [0, 1, 2, 3, 4, 5];
+var randomNumber = luckyNumber[Math.floor(Math.random() * luckyNumber.length)];
+var discount;
+var totalBill;
+var totalAmount = prompt("What is your bill total today?")
+function calculateTotal(rando, meal){
+    switch (rando){
+        case 0:
+            totalBill = meal;
+            alert("Sorry, no discount today. Your total is: $" + meal)
+            break;
+        case 1:
+            discount = .10;
+            totalBill = meal - (meal * discount);
+            alert("You get a 10% discount today! Your new total is: $" + totalBill.toFixed(2))
+            break;
+        case 2:
+            discount = .20;
+            totalBill = meal - (meal * discount);
+            alert("You get a 20% discount today! Your new total is: $" + totalBill.toFixed(2))
+            break;
+        case 3:
+            discount = .33
+            totalBill = meal - (meal * discount);
+            alert("You get a 33% discount today! Your new total is: $" + totalBill.toFixed(2))
+            break;
+        case 4:
+            discount = .50
+            totalBill = meal - (meal * discount);
+            alert("You get a 50% discount today! Your new total is: $" + totalBill.toFixed(2))
+            break;
+        case 5:
+            totalBill = 0
+            alert("You get a 100% discount today! Your new total is: $" + totalBill.toFixed(2))
+
+    }
+}
+calculateTotal(randomNumber, totalAmount);
 /**
  * TODO:
  * Write some JavaScript that uses a `confirm` dialog to ask the user if they
@@ -105,3 +202,23 @@ analyzeColor(randomColor);
  * Can you refactor your code to use functions?
  * HINT: The way we prompt for a value could be improved
  */
+function playAGame(){
+    var playGame = confirm("Would you like to play a game?");
+    if (playGame) {
+        var userNumber = prompt("Please enter a whole number without decimals:")
+        if(userNumber == NaN){
+            prompt("That was not a number. Please enter a whole number without decimals:")
+        } else {
+            var evenOdd = (userNumber % 2 === 0) ? "Your number is even." : "Your number is odd."
+            var positiveNegative = (userNumber > 0) ? "Your number is positive" : "Your number is negative"
+            alert(evenOdd)
+            alert(positiveNegative)
+            alert("Your number plus 100 is " + (parseInt(userNumber) + 100))
+        }
+
+    } else alert("Party pooper!")
+}
+playAGame();
+playAGame();
+playAGame();
+playAGame();
