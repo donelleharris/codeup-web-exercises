@@ -1,0 +1,3 @@
+const returnMultiplicationTable = function (){
+
+}
