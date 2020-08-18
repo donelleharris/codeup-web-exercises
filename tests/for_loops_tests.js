@@ -81,9 +81,13 @@ describe("returnTenEvenOddMessages", function() {
 // Number Sail Tests
 describe("returnNumberSail", function() {
     // TODO: include a test to verify that the function is defined
-
+    it('should be defined', function () {
+        expect(returnNumberSail).toBeDefined();
+    });
     // TODO: include a test to verify that the function output is a string
-
+    it('should be a string', function () {
+        expect(typeof returnNumberSail()).toBe("string");
+    });
     // TODO: include a test to verify that the function output matches the following value
     var expectedValue = "1\n" +
         "22\n" +
@@ -94,8 +98,16 @@ describe("returnNumberSail", function() {
         "7777777\n" +
         "88888888\n" +
         "999999999";
+    it('should match output of expectedValue', function () {
+        expect(returnNumberSail()).toEqual(expectedValue);
+    });
 });
 
 
 // Count Down in Fives Tests
 // TODO: include another test suite that verifies that returnCountDownFrom100InFives is defined (first test) and returns the expected output (second test)
+describe("returnCountDownFrom100InFives", function() {
+    it('should be defined', function () {
+        expect(returnCountDownFrom100InFives).toBeDefined();
+    });
+});

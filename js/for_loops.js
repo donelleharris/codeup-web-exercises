@@ -13,7 +13,6 @@ var returnEvenOddMessage = function (i){
         return "odd"
     } else {return "even"}
 }
-console.log(returnEvenOddMessage(5));
 
 function returnTenEvenOddMessages() {
     let evenOdd = ""
@@ -28,4 +27,16 @@ function returnTenEvenOddMessages() {
     }
     return evenOdd;
 }
-    console.log(returnTenEvenOddMessages());
+var returnNumberSail = function (){
+    let num = '';
+    for(let i = 1; i < 10; i++){
+        let j = i.toString();
+        num += j.repeat(i);
+        if(i !== 9) num += '\n'
+    }
+    return num;
+}
+
+var returnCountDownFrom100InFives = function (){
+
+}
