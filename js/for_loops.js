@@ -1,4 +1,5 @@
-var returnMultiplicationTable = function (num){
+// returnMultiplicationTable function
+function returnMultiplicationTable(num){
 var i = 1;
 let output = "";
 while (i <= 10){
@@ -8,12 +9,14 @@ while (i <= 10){
     }
     return output;
 }
-var returnEvenOddMessage = function (i){
+// returnEvenOddMessage function
+function returnEvenOddMessage(i){
     if (i % 2 !== 0) {
         return "odd"
     } else {return "even"}
 }
 
+// returnTenEvenOddMessages function
 function returnTenEvenOddMessages() {
     let evenOdd = ""
     for (let i = 1; i < 11; i++) {
@@ -27,6 +30,8 @@ function returnTenEvenOddMessages() {
     }
     return evenOdd;
 }
+
+// returnNumberSail function
 var returnNumberSail = function (){
     let num = '';
     for(let i = 1; i < 10; i++){
@@ -37,6 +42,7 @@ var returnNumberSail = function (){
     return num;
 }
 
+// returnCountDownFromFives function
 var returnCountDownFrom100InFives = function (){
 
 }
