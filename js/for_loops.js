@@ -43,6 +43,12 @@ var returnNumberSail = function (){
 }
 
 // returnCountDownFromFives function
-var returnCountDownFrom100InFives = function (){
-
+var countDownFrom100InFives = function (){
+    let output = ''
+    for(let i = 100; i > 0; i -= 5){
+        output += i
+        if (i !== 5) output += '\n'
+    }
+    console.log(output);
+    return output;
 }
