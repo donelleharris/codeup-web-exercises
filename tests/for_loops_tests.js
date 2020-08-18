@@ -27,23 +27,27 @@ describe("returnMultiplicationTable", function() {
 // Random Number Even/Odd Messages Tests
 describe("returnEvenOddMessage", function() {
     it("should be defined", function() {
-        // TODO: add an assertion to verify that the function is defined
-
+        expect(returnEvenOddMessage).toBeDefined();
     });
     it("should return a string when passed an integer", function() {
         // TODO: add an assertion verifying that the function returns a string when passed an integer
-
+        expect(typeof returnEvenOddMessage(1)).toBe("string")
     });
-    it("should return the correct message when passed an integer", function() {
+    it('should return "odd" when passed an odd number', function() {
         // TODO: add several assertions that verify the correct string output for a given integer input
-
+        expect(returnEvenOddMessage(1)).toBe("odd");
+    });
+    it('should return "even" when passed an even number', function () {
+        expect(returnEvenOddMessage(4)).toBe("even")
     });
 });
 
 describe("returnTenEvenOddMessages", function() {
 
     // TODO: add a test to verify that the function is defined
-
+    it("should be defined", function() {
+        expect(returnTenEvenOddMessages()).toBeDefined();
+    });
     it("should return an output that ends with the word 'odd' or 'even'", function() {
         var output = returnTenEvenOddMessages();
         // TODO: add an assertion to verify that the function output ends with either "even" or "odd"
@@ -69,8 +73,8 @@ describe("returnTenEvenOddMessages", function() {
         }
 
         // TODO: assert that the outputContainsExpectedNumbers function returns true
-
-    });
+            expect(outputContainsExpectedNumbers()).toBe(true);
+        });
 });
 
 
