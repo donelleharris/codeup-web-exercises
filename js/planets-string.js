@@ -24,10 +24,10 @@
      * string, and <li> tags around each planet.
      */
 
-    let stringOfPlanets = "Mercury|Venus|Earth|Mars|Jupiter|Saturn|Uranus|Neptune";
-    let arrayOfPlanets = stringOfPlanets.split("|");
-    console.log(arrayOfPlanets.join("<br>"));
+    let newPlanetArray = planetsArray.join("<br>")
+    console.log(newPlanetArray);
 
     // Bonus
-    console.log('<ul>\n   <li>' + arrayOfPlanets.join('</li>\n   <li>') + '</li>\n</ul>')
+    let planetsUL =  '<ul>\n   <li>' + planetsArray.join('</li>\n   <li>') + '</li>\n</ul>'
+    console.log(planetsUL);
 })();
