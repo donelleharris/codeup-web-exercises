@@ -7,7 +7,8 @@
  * 'names'.
  */
 var names = ['Dale', 'Lorri', 'Wendy', 'Beverly']
-/**
+    console.log(names);
+    /**
  * TODO:
  * Create a log statement that will log the number of elements in the names
  * array.
