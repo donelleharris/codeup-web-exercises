@@ -14,10 +14,10 @@
 var person = {
     firstName: "Donelle",
     lastName: "Harris",
-        sayHello: function (){
-            return "Hello from " + this.firstName + " " + this.lastName + "!";
-        }
+    sayHello: function (){
+        return "Hello from " + this.firstName + " " + this.lastName + "!";
     }
+    };
     console.log(person.sayHello());
     /**
      * TODO:
@@ -49,7 +49,7 @@ var person = {
         {name: 'George', amount: 320}
     ];
     shoppers.forEach(function (shopper){
-        if (shopper.amount >= 250) {
+        if (shopper.amount > 200) {
             console.log(shopper.name + " you are eligible for 12% Discount! Your total before discount is: $" + shopper.amount + " Your total after discount is: $" + (shopper.amount * .88));
         } else {
             console.log(shopper.name + " you are ineligible for a discount.");
@@ -69,6 +69,52 @@ var person = {
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
+var books = [
+        {
+            title: "Harry Potter and the Sorcerer's Stone",
+            author: {firstName: "J.K.", lastName: "Rowling"},
+        },
+        {
+            title: "The Lightning Thief",
+            author: {firstName: "Rick", lastName: "Riordan"},
+        },
+        {
+            title: "Harry Potter and the Chamber of Secrets",
+            author: {firstName: "J.K.", lastName: "Rowling"},
+        },
+        {
+            title: "Harry Potter and the Prisoner of Azkaban",
+            author: {firstName: "J.K.", lastName: "Rowling"},
+        },
+        {
+            title: "Harry Potter and the Goblet of Fire",
+            author: {firstName: "J.K.", lastName: "Rowling"},
+        },
+        {
+            title: "Harry Potter and the Half-Blood Prince",
+            author: {firstName: "J.K.", lastName: "Rowling"},
+        },
+        {
+            title: "Harry Potter and the Deathly Hallows",
+            author: {firstName: "J.K.", lastName: "Rowling"},
+        },
+        {
+            title: "The Sea of Monsters",
+            author: {firstName: "Rick", lastName: "Riordan"},
+        },
+        {
+            title: "The Titan's Curse",
+            author: {firstName: "Rick", lastName: "Riordan"},
+        },
+        {
+            title: "The Battle of the Labyrinth",
+            author: {firstName: "Rick", lastName: "Riordan"},
+        },
+        {
+            title: "The Last Olympian",
+            author: {firstName: "Rick", lastName: "Riordan"},
+        },
+    ]
 
     /**
      * TODO:
@@ -105,5 +151,39 @@ var person = {
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
+var createBook = function (title, firstName, lastName){
+    var book = {};
+        title = prompt("Book title: ")
+        firstName = prompt("Author first name: ")
+        lastName = prompt("Author last name:")
+        book.title = title;
+        book.author = {
+            firstName: firstName,
+            lastName: lastName,
+        };
+        return book;
+    }
+books.push(createBook());
 
+var showBookInfo = function (book, bookNumber){
+    console.log("Book #" + bookNumber);
+    console.log("Title: " + book.title);
+    console.log("Author: " + book.author.firstName + " " + book.author.lastName);
+    console.log('---');
+}
+for (let i = 0; i < books.length; i++){
+    console.log("Book #" + (i + 1));
+    console.log("Title: " + books[i].title);
+    console.log("Author: " + books[i].author.firstName + " " + books[i].author.lastName);
+    console.log('---');
+}
+//
+// console.log(books)
+// function showBookInfo(book){
+//     var outPut = "";
+//     outPut += "Title: " + books.title; + "\n" + "Author: " + books.author.firstName + " " + books.author.lastName;
+//     return outPut;
+// }
+//
+//     console.log(showBookInfo(books[0]));
 })();
