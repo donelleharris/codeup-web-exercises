@@ -1,4 +1,4 @@
-(function() {
+// (function() {
     "use strict";
 
     // create a circle object
@@ -18,9 +18,8 @@
             // If doRounding is true, round the result to the nearest integer.
             // Otherwise, output the complete value
             if (doRounding === true){
-                Math.round(this.getArea);
-            } else {return this.getArea}
-            console.log("Area of a circle with radius: " + this.radius + ", is: ");
+                console.log("Area of a circle with radius: " + this.radius + ", is: " + Math.round(this.getArea));
+            } else {return console.log("Area of a circle with radius: " + this.radius + ", is: " + this.getArea)}
         }
     };
 
@@ -38,4 +37,4 @@
     circle.logInfo(false);
     console.log("Circle information rounded to the nearest whole number");
     circle.logInfo(true);
-})();
+// })();
