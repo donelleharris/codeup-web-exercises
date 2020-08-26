@@ -25,39 +25,39 @@
     pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
-<button id="cool">JavaScript is Cool!</button>
-<button id="blue">Sub-header to blue</button>
-<button id="li">List items color change</button>
-<button id="mission">Mission Accomplished!</button>
+<button id="cool">JavaScript is Cool!</button><br><br>
+<button id="li">List items color change</button><br><br>
+<button id="blue">Sub-header to blue</button><br><br>
+<button id="mission">Mission Accomplished!</button><br><br>
+
 <script>
+    "use strict";
     (function() {
-        "use strict";
-        // TODO: get the main header element by id
-        // TODO: get the sub header element by id
-        // TODO: get all list items
-        // TODO: get all elements with class name sub-paragraph
-        var mainHeader = document.getElementById('main-header');
-        var subHeader = document.getElementById('sub-header');
-        var listItems = document.getElementsByTagName('li');
-        var subParagraphs = document.getElementsByClassName('sub-paragraph')[0];
-        var listDB1 = document.querySelector('[data-dbid="1"]');
+    // TODO: get the main header and sub header elements by id
+        let mainHeader = document.getElementById('main-header');
+        let subHeader = document.getElementById('sub-header');
 
-        // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+    // TODO: get all list items
+        let listItems = document.getElementsByTagName('li');
 
-        var buttonOneClicked = function (event) {
+    // TODO: get all elements with class name sub-paragraph
+        let subParagraphs = document.getElementsByClassName('sub-paragraph')[0];
+
+
+    // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+        let buttonOneClicked = function (event) {
             mainHeader.innerHTML = 'JavaScript is Cool';
         }
 
-        // TODO: Set the text color of subHeader to blue
-
-        var buttonTwoClicked = function (event) {
+    // TODO: Set the text color of subHeader to blue
+        let buttonTwoClicked = function (event) {
             subHeader.style.color = 'blue';
         }
 
-        // TODO: Set text color on every other list item to grey
-        // TODO: Set text color of li with dbid = 1 to blue
-
-        var buttonThreeClicked = function () {
+    // TODO: Set text color on every other list item to grey
+    // TODO: Set text color of li with dbid = 1 to blue
+        let listDB1 = document.querySelector('[data-dbid="1"]');
+        let buttonThreeClicked = function () {
             for (let i = 0; i < listItems.length; i++) {
                 if (i % 2 !== 0) {
                     listItems[i].setAttribute('style', 'color: gray;');
@@ -65,16 +65,16 @@
             }
             listDB1.setAttribute('style', 'color: blue;');
         }
-        // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-        var buttonFourClicked = function (event) {
+    // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+        let buttonFourClicked = function (event) {
             subParagraphs.innerHTML = 'Mission Accomplished';
         }
 
-        // TODO: Add four buttons and add event listeners that perform the modifications above
-        var btn1 = document.getElementById('cool');
-        var btn2 = document.getElementById('blue');
-        var btn3 = document.getElementById('li');
-        var btn4 = document.getElementById('mission');
+    // TODO: Add four buttons and add event listeners that perform the modifications above
+        let btn1 = document.getElementById('cool');
+        let btn2 = document.getElementById('blue');
+        let btn3 = document.getElementById('li');
+        let btn4 = document.getElementById('mission');
 
         btn1.addEventListener('click', buttonOneClicked);
         btn2.addEventListener('click', buttonTwoClicked);
