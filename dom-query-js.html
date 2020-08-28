@@ -56,14 +56,17 @@
 
     // TODO: Set text color on every other list item to grey
     // TODO: Set text color of li with dbid = 1 to blue
-        let listDB1 = document.querySelector('[data-dbid="1"]');
+
         let buttonThreeClicked = function () {
             for (let i = 0; i < listItems.length; i++) {
-                if (i % 2 !== 0) {
-                    listItems[i].setAttribute('style', 'color: gray;');
+                let dbid = listItems[i].getAttribute('data-dbid');
+                if(dbid === '1'){
+                    listItems[i].style.color = 'blue'
+                }
+                else if (dbid % 2 === 0) {
+                    listItems[i].style.color = 'gray'
                 }
             }
-            listDB1.setAttribute('style', 'color: blue;');
         }
     // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
         let buttonFourClicked = function (event) {

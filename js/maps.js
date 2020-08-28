@@ -92,3 +92,6 @@ map.on('mouseleave', 'places', function() {
     map.getCanvas().style.cursor = '';
 });
 });
+document.getElementById('zoom').addEventListener('click', function() {
+    map.zoomTo(19, { duration: 9000 });
+});
