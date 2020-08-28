@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>DOM: Query and Modify</title>
@@ -33,29 +33,34 @@
 <script>
     "use strict";
     (function() {
-    // TODO: get the main header and sub header elements by id
+// TODO: get the main header and sub header elements by id
+
         let mainHeader = document.getElementById('main-header');
         let subHeader = document.getElementById('sub-header');
 
-    // TODO: get all list items
+// TODO: get all list items
+
         let listItems = document.getElementsByTagName('li');
 
-    // TODO: get all elements with class name sub-paragraph
+// TODO: get all elements with class name sub-paragraph
+
         let subParagraphs = document.getElementsByClassName('sub-paragraph')[0];
 
 
-    // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+// TODO: Set inner html of mainHeader to "JavaScript is Cool"
+
         let buttonOneClicked = function (event) {
-            mainHeader.innerHTML = 'JavaScript is Cool';
+            mainHeader.innerText = 'JavaScript is Cool';
         }
 
-    // TODO: Set the text color of subHeader to blue
+// TODO: Set the text color of subHeader to blue
+
         let buttonTwoClicked = function (event) {
             subHeader.style.color = 'blue';
         }
 
-    // TODO: Set text color on every other list item to grey
-    // TODO: Set text color of li with dbid = 1 to blue
+// TODO: Set text color on every other list item to grey
+// TODO: Set text color of li with dbid = 1 to blue
 
         let buttonThreeClicked = function () {
             for (let i = 0; i < listItems.length; i++) {
@@ -68,12 +73,15 @@
                 }
             }
         }
-    // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+
+// TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+
         let buttonFourClicked = function (event) {
-            subParagraphs.innerHTML = 'Mission Accomplished';
+            subParagraphs.innerText = 'Mission Accomplished';
         }
 
-    // TODO: Add four buttons and add event listeners that perform the modifications above
+// TODO: Add four buttons and add event listeners that perform the modifications above
+
         let btn1 = document.getElementById('cool');
         let btn2 = document.getElementById('blue');
         let btn3 = document.getElementById('li');
