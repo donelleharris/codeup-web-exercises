@@ -5,13 +5,36 @@
     <title>Title</title>
 </head>
 <body>
-
+    <div class="codeup">
+        <h1 id="h1">jQuery Exercises</h1>
+        <p id="p1">This is the first 'p' tag in the 'div'.</p>
+        <p id="p2">This is the second 'p' tag in the 'div'.</p>
+    </div>
+    <ul id="codeup">
+        <li >list item 1</li>
+        <li >list item 2</li>
+        <li >list item 3</li>
+        <li >list item 4</li>
+    </ul>
 
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
 <script>
-
+    (function (){ //IIFE (immediately invoked function expression)
+        'use strict';
+        $().ready(function() {
+            var contents = $('#h1').html();
+            // $('#p1').html('some content to replace');
+            alert(contents);
+        });
+        $().ready(function (){
+            // $('h1').css('background-color','#ff0');
+            // $('p').css('background-color','#ff0');
+            // $('li').css('background-color','#ff0');
+            $('h1, p, li').css('background-color','#ff0');
+        })
+    })();
 </script>
 </body>
 </html>
