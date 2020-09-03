@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="codeup">
-        <h1 id="h1">jQuery Exercises</h1>
+    <div>
+        <h1 id="h1" class="codeup">jQuery Exercises</h1>
         <p id="p1">This is the first 'p' tag in the 'div'.</p>
         <p id="p2">This is the second 'p' tag in the 'div'.</p>
     </div>
@@ -21,20 +21,43 @@
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
 <script>
-    (function (){ //IIFE (immediately invoked function expression)
+    // jQuery Selectors Lesson
+    // (function (){ //IIFE (immediately invoked function expression)
+    //     'use strict';
+    //     $().ready(function() {
+    //         var contents = $('#h1').html();
+    //         // $('#p1').html('some content to replace');
+    //         alert(contents);
+    //     });
+    //     $().ready(function (){
+    //         $('li').css('font-size', '20px')
+    //         $('h1').css('background-color','#ff0');
+    //         $('p').css('background-color','#ff0');
+    //         $('li').css('background-color','#ff0');
+    //         $('h1, p, li').css('background-color','#ff0');
+    //     })
+    // })();
+
+// JQuery Mouse Events Lesson
+    (function (){
         'use strict';
-        $().ready(function() {
-            var contents = $('#h1').html();
-            // $('#p1').html('some content to replace');
-            alert(contents);
-        });
         $().ready(function (){
-            $('li').css('font-size', '20px')
-            // $('h1').css('background-color','#ff0');
-            // $('p').css('background-color','#ff0');
-            // $('li').css('background-color','#ff0');
-            $('h1, p, li').css('background-color','#ff0');
-        })
+            $('h1').click(function() {
+                $(this).css('background-color', '#0ff')
+            });
+            $('p').dblclick(function() {
+                $(this).css('font-size', '18px')
+            });
+            var bg_color;
+            $('#codeup').hover(function(e) {
+                    bg_color = $(this).css('color');
+                    $(this).css('color', '#0ff');
+                },
+                function(e) {
+                    $(this).css('color', bg_color);
+
+                });
+        });
     })();
 </script>
 </body>
