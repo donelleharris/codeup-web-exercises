@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        img {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<h1>Konami Code</h1>
+<p>
+    Click somewhere in the output box [here] to ensure focus.<br>
+    Then enter the following code using your keyboard:
+</p>
+
+<p class="code">
+    <span>&uarr;</span>
+    <span>&uarr;</span>
+    <span>&darr;</span>
+    <span>&darr;</span>
+    <span>&larr;</span>
+    <span>&rarr;</span>
+    <span>&larr;</span>
+    <span>&rarr;</span>
+    <span>B</span>
+    <span>A</span>
+</p>
+<img src="#">
+
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+    (function () {
+        'use strict';
+        $().ready(function () {
+            function konami(fn){
+            var input = '';
+            var konamiCode = '38384040373937396665'
+            $(document).keydown(function (e){
+                input += e.keyCode;
+                if(input.indexOf(konamiCode) !== -1){
+                    fn();
+                    input = '';
+                }
+            });
+        };
+        $(document).ready(function() {
+            konami(function() {
+                $('body').css('background-color','#0ff');
+                alert("You have added 30 lives!");
+                var a = new Audio()
+                a.src =  "audio/alert1.wav"
+                a.play()
+                $('h1, p').hide();
+                $('img').attr("src", "img/konamiImg.jpg");
+            });
+        });
+    });
+    })();
+
+
+</script>
+</body>
+</html>
