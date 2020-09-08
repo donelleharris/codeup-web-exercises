@@ -30,18 +30,26 @@
     </style>
 </head>
 <body>
+
     <h1>Ten Best of Everything: National Parks - Epic Backpacking Trips</h1>
     <a href="#" id="show_hide">Show Facts</a><br><br>
-    <button id="yellow">last li highlight</button> <br>
+    <button id="yellow">last li highlight</button>
+    <br>
+    <div id="newsletter">
+        <h1><span>x</span>  Would you like to sign up for our newsletter?</h1>
+    </div>
+    <h2 id="register">Please register for our site.</h2>
+
     <div id="frame"><img src="img/park1.jpeg" alt=""></div>
     <div id="frame"><img src="img/park2.jpeg" alt=""></div>
     <div id="frame"><img src="img/park3.jpg" alt=""></div>
+
     <br>
     <dl>
         <dt><h2 class="dt">Yosemite National Park</h2></dt>
         <dd class="invisible">
             <h3>215-mile John Muir Trail</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li>ties in the Ansel Adams Wilderness and Sequoia & Kings Canyon National Parks</li>
                 <li>route follows the Sierra Nevada</li>
                 <li>scale over, around or near legendary sites such as subalpine Tuolumne Meadows, Merced River, Half Dome, Cathedral Lake and the Lyell Canyon</li>
@@ -52,7 +60,7 @@
         <dt><h2 class="dt">Rocky Mountain National Park</h2></dt>
         <dd class="invisible">
             <h3>40-mile Colorado Grand Loop</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li>traverses the continental divide</li>
                 <li>bird's eye view of the American West</li>
                 <li>panoramas of wildflowers, purple mountains and the occasional elk</li>
@@ -63,7 +71,7 @@
         <dt><h2 class="dt">Grand Canyon National Park</h2></dt>
         <dd class="invisible">
             <h3>34-mile Royal Arch Loop</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -74,7 +82,7 @@
         <dt><h2 class="dt">Mount Rainier National Park</h2></dt>
         <dd class="invisible">
             <h3>93-mile Wonderland Trail</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -85,7 +93,7 @@
         <dt><h2 class="dt">Glen Canyon National Recreation Area</h2></dt>
         <dd class="invisible">
             <h3>30-mile Rainbow Trail</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li>requires a permit issued from the Navajo Nation Parks & Recreation Department</li>
                 <li>winds around the footprint of Navajo Mountain</li>
                 <li>offers oportunity to camp beside Rainbow Bridge, the world's largest natural bridge</li>
@@ -95,7 +103,7 @@
         <dt><h2 class="dt">Chesapeake & Ohio Canal National Historical Park</h2></dt>
         <dd class="invisible">
             <h3>184-mile Towpath</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -106,7 +114,7 @@
         <dt><h2 class="dt">Canyonlands National Park</h2></dt>
         <dd class="invisible">
             <<h3>>7-20 mile Trails:</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li>Sky</li>
                 <li>Needles</li>
                 <li>Maze Districts</li>
@@ -116,7 +124,7 @@
         <dt><h2 class="dt">Appalachian National Scenic Trail</h2></dt>
         <dd class="invisible">
             <h3>2,175-miles Maine to Georgia</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -127,7 +135,7 @@
         <dt><h2 class="dt">Wrangell-St. Elias National Park & Preserve</h2></dt>
         <dd class="invisible">
             <h3>48-mile Tebay Lakes to Bremmer</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -138,7 +146,7 @@
         <dt><h2 class="dt">Voyageurs National Park</h2></dt>
         <dd class="invisible">
             <h3>30-mile Kab-Ash Trail</h3>
-            <ul id="ul">
+            <ul class="uList">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -151,6 +159,14 @@
         (function (){
             'use strict';
             $().ready(function (){
+                $('.uList').hide();
+                $('span').click(function (e){
+                    e.preventDefault();
+                    $('#newsletter').hide()
+                });
+
+                $('#register').hide().delay(8000).fadeIn('slow');
+
                 $('dt').click(function (e){
                     e.preventDefault();
                     $(this).toggleClass('highlight');
@@ -168,14 +184,17 @@
                 });
                 $('h3').click(function (e){
                     e.preventDefault();
-                    $('h3').next().toggleClass('bold');
+                    $(this).parent().children().toggleClass('bold');
+                    $('.uList').slideToggle('uList')
                 })
                 $('li').click(function (e){
                     e.preventDefault();
                     $('ul').each(function (index, element) {
                         $(element).children().first().css('color', 'blue')
                     })
-                })
+                });
+
+
             });
         })();
     </script>
