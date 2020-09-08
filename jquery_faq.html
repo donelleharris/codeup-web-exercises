@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>jQuery Attributes & CSS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
         .highlight {
             background: cadetblue;
@@ -16,7 +17,7 @@
         button, a {
             margin: 10px;
         }
-        #frame {
+        .frame {
             float: left;
             border: 4px solid black;
             height: 150px;
@@ -35,14 +36,23 @@
     <a href="#" id="show_hide">Show Facts</a><br><br>
     <button id="yellow">last li highlight</button>
     <br>
-    <div id="newsletter">
-        <h1><span>x</span>  Would you like to sign up for our newsletter?</h1>
-    </div>
-    <h2 id="register">Please register for our site.</h2>
 
-    <div id="frame"><img src="img/park1.jpeg" alt=""></div>
-    <div id="frame"><img src="img/park2.jpeg" alt=""></div>
-    <div id="frame"><img src="img/park3.jpg" alt=""></div>
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3>Would you like to sign up for our newsletter?</h3>
+    </div>
+
+    <h3 id="register">Please register for our site.</h3>
+
+    <div class="frame" id="pic1">
+        <img src="img/park1.jpeg" alt="">
+    </div>
+    <div class="frame" id="pic2">
+        <img src="img/park2.jpeg" alt="">
+    </div>
+    <div class="frame" id="pic3">
+        <img src="img/park3.jpg" alt="">
+    </div>
 
     <br>
     <dl>
@@ -154,16 +164,22 @@
             </ul>
         </dd>
     </dl>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
     <script src="js/jquery-2.2.4.js"></script>
+
     <script>
-        (function (){
+        (function ($){
             'use strict';
             $().ready(function (){
                 $('.uList').hide();
-                $('span').click(function (e){
-                    e.preventDefault();
-                    $('#newsletter').hide()
-                });
+                // $('span').click(function (e){
+                //     e.preventDefault();
+                //     $('#newsletter').hide()
+                // });
+                // alert($('#newsletter').text());
 
                 $('#register').hide().delay(8000).fadeIn('slow');
 
@@ -185,16 +201,37 @@
                 $('h3').click(function (e){
                     e.preventDefault();
                     $(this).parent().children().toggleClass('bold');
-                    $('.uList').slideToggle('uList')
+                    $(this).parent().children('.uList').slideToggle('uList')
                 })
                 $('li').click(function (e){
                     e.preventDefault();
-                    $('ul').each(function (index, element) {
-                        $(element).children().first().css('color', 'blue')
-                    })
+                    $(this).parent().children('li').first().css('color', 'blue');
                 });
-
-
+                $('#pic1').click(function () {
+                    var newPic1 = $('#pic1').html()
+                    var newPic2 = $('#pic2').html()
+                    $(this).html(newPic2)
+                    $(this).next().html(newPic1)
+                });
+                $('#pic2').click(function (){
+                    var newPic1 = $('#pic1').html()
+                    var newPic2 = $('#pic2').html()
+                    var newPic3 = $('#pic3').html()
+                    var top = Math.round(Math.random());
+                    if(top == 1) {
+                        $(this).html(newPic1)
+                        $('#pic1').html(newPic2)
+                    } else if (top === 0){
+                        $(this).html(newPic3)
+                        $('#pic3').html(newPic2)
+                    }
+                });
+                $('#pic3').click(function (){
+                    var newPic2 = $('#pic2').html()
+                    var newPic3 = $('#pic3').html()
+                    $(this).html(newPic2)
+                    $(this).next().html(newPic3)
+                })
             });
         })();
     </script>
