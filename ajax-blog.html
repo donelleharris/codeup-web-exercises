@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body {
+            background: cadetblue;
+        }
+        .jumbotron {
+            background-image: url("img/roman-kraft-ZoAlN3-pJO8-unsplash.jpg");
+            background-size: cover;
+            background-position: bottom;
+
+        }
+        .jumbotron>h1{
+            text-align: center;
+            color: white;
+            background: #5f9ea8b1;
+        }
+        .jumbotron>p {
+            text-align: center;
+            color: white;
+            background: #5f9ea8b1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Ipsum Blogs</h1>
+        <p>Playing with Ipsum</p>
+    </div>
+    <div id="posts" class="container "></div>
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script>
+        (function() {
+            "use strict";
+
+            function postBuilder ({title, content, categories, date}){
+                return `
+                    <div class="border bg-light m-2 p-3">
+                    <h4 class="">${title}</h4>
+                    <p class="font-weight-light">${date}</p>
+                    <hr>
+                    <p class="">${content}</p>
+                    <p class="font-weight-lighter">${categories.join(', ')}</p>
+                    </div>
+                `
+            }
+            function renderPost(posts){
+                var postHtml = '';
+                for(var post of posts){
+                    postHtml += postBuilder(post)
+                }
+                $('#posts').html(postHtml);
+            }
+
+            $.get('data/blog.json').done(function (blogs){
+                console.log(blogs)
+                renderPost(blogs)
+            });
+        })();
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

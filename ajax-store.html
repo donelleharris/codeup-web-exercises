@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0 1em;
+        }
+        .jumbotron-fluid {
+            height: 250px;
+            background-image: url("img/true-value-logo.jpg");
+            background-size: cover;
+            background-position: top;
+        }
+    </style>
+</head>
+<body>
+<div class="jumbotron-fluid "></div>
+<hr>
+<h1 class="float-left mr-4">Current Inventory</h1>
+<button id="refresh-btn" class="btn-lg">Refresh Table</button>
+
+<table id="products"  class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col" class="text-center">Quantity</th>
+        <th scope="col" class="text-center">Price</th>
+        <th scope="col" class="text-center">Categories</th>
+    </tr>
+    </thead>
+    <tbody id="insertProducts"></tbody>
+</table>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="js/jquery-2.2.4.js"></script>
+<script type="text/javascript">
+    // TODO: Create an AJAX GET request for the file under data/inventory.json
+    // TODO: Take the data from inventory.json and append it to the products table
+    //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+    //             its contents and fields
+    //       HINT: You will want to target #insertProducts for your new HTML elements
+
+    (function() {
+        "use strict";
+        $().ready(function () {
+            function itemHTMLBuilder({price, quantity, title, categories}) {
+                // var {title, quantity, categories, price} = item
+                return `
+                <tr scope="row" >
+                    <td class="text-left">${title}</td>
+                    <td class="text-center">${quantity}</td>
+                    <td class="text-center">$${price}.00</td>
+                    <td class="text-left">${categories.join(', ')}</td>
+                </tr>
+                `
+            }
+
+            function renderInventory(inventoryList) {
+                var htmlBuilder = '';
+                // loop through inventoryList
+                for (var item of inventoryList) {
+                    htmlBuilder += itemHTMLBuilder(item)
+                }
+                $('#insertProducts').html(htmlBuilder);
+            }
+
+            $.get("data/inventory.json").done(function (inventory) {
+                console.log(inventory)
+                renderInventory(inventory)
+            });
+
+            $('#refresh-btn').click(function () {
+                location.reload(true);
+            });
+        });
+    })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
