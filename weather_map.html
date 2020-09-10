@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Map Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        p {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+    <h1 class="mt-4 bg-primary">Weather App</h1>
+    <div class="mx-5">
+        <h4 id="location" class="text-light font-weight-lighter"></h4>
+        <div id="currentWeather" class="d-flex"></div>
+        <hr>
+        <h4 class="text-light font-weight-lighter">Current Weather Map</h4>
+        <div id="map" class=""></div>
+    </div>
+
+<script src="js/keys.js"></script>
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+    (function (){
+        'use strict';
+
+        function forecastBuilder (locationName, forecast){
+            const {clouds, dt, main, pop, rain, sys, visibility, weather, wind} = forecast;
+
+            return `
+            <div class="card bg-light mb-3 mx-1 text-center flex-column" style="max-width: 18rem;">
+              <div class="card-header">${dt}</div>
+              <div class="card-body">
+                <div>
+                    <p>High / Temp</p>
+                    <p class="card-text"><strong>${main.temp_max} / ${main.temp_min}</strong></p>
+                </div>
+
+                <hr>
+                <div>
+                <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="">
+                <p class="card-text">Description: <strong>${weather[0].description}</strong></p>
+
+                </div>
+                <hr>
+                <p class="card-text">Humidity: <strong>${main.humidity}</strong></p>
+                <hr>
+                <p class="card-text">Wind Speed: <strong>${wind.speed}</strong></p>
+                <hr>
+                <p class="card-text">Pressure: <strong>${main.pressure}</strong></p>
+              </div>
+            </div>
+            `
+        }
+
+        function renderForecasts(locationName, forecasts) {
+            var postHtml = ' ';
+            for (let forecast of forecasts) {
+                postHtml += forecastBuilder(locationName, forecast)
+            }
+            $('#currentWeather').html(postHtml);
+            $('#location').html(`${locationName} Weather`)
+        }
+
+        mapboxgl.accessToken = MAPBOX_TOKEN;
+
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [-98.4936, 29.4241], // starting position [lng, lat]
+            zoom: 9 // starting zoom
+        });
+        /*
+        Parameters Description
+        {layer} layer name
+        {z} number of zoom level
+        {x} number of x tile coordinate
+        {y} number of y tile coordinate
+        {api_key} Your API key
+         */
+
+        /*https://tile.openweathermap.org/map/{layer}/{9}/{${data.city.coord.lon}}/{${data.city.coord.lat}}.png?appid={OPEN_WEATHER_APPID}*/
+
+
+        $.get("http://api.openweathermap.org/data/2.5/forecast", {
+            APPID: OPEN_WEATHER_APPID,
+            q:     "San Antonio, US",
+            units: "imperial",
+            cnt: 5
+        }).done(function (data) {
+            console.log(data);
+            console.log(data.list);
+            renderForecasts(data.city.name, data.list);
+        });
+
+    })();
+</script>
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

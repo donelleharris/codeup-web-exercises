@@ -55,5 +55,13 @@
         "outdoor"
     ],
     "price": 25
-    }
+    }, {
+    "title": "Rake",
+    "quantity": 12,
+    "categories": [
+        "tool",
+        "outdoor"
+    ],
+    "price": 25
+}
 ]
