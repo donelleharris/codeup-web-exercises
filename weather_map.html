@@ -7,27 +7,32 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-        p {
-            font-size: 10px;
-        }
-        .card-header {
-            font-size: 15px;
-        }
-    </style>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+            type="text/css"
+    />
+    <link rel="stylesheet" href="css/weather_map.css">
 </head>
 <body class="bg-dark">
-    <h1 class="mt-4 bg-primary">Weather App</h1>
+    <div class="my-4 py-2 bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="">Weather App</h1>
+        <div id="geocoder" class="geocoder "></div>
+    </div>
     <div class="mx-5">
         <h4 id="location" class="text-light font-weight-lighter"></h4>
         <div id="currentWeather" class="d-flex"></div>
         <hr>
-        <h4 id="mapHeading" class="text-light font-weight-lighter"></h4>
-        <div id="map" class=""></div>
+
+        <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+        <div id="map"></div>
+        <pre id="coordinates" class="coordinates"></pre>
+
+
     </div>
 
 <script src="js/keys.js"></script>
@@ -35,13 +40,13 @@
 <script>
     (function (){
         'use strict';
-
-        function forecastBuilder (locationName, forecast){
-            const {dt, main, weather, wind} = forecast;
-            var dateTime = new Date(`${dt}`*1000);
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            var formatted = dateTime.toLocaleDateString('en-US', options);
-            return `
+        $().ready(function () {
+            function forecastBuilder(locationName, forecast) {
+                const {dt, main, weather, wind} = forecast;
+                var dateTime = new Date(`${dt}` * 1000);
+                const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                var formatted = dateTime.toLocaleDateString('en-US', options);
+                return `
             <div class="card bg-light mb-3 mx-1 text-center flex-column" style="max-width: 18rem;">
               <div class="card-header">${formatted}</div>
               <div class="card-body">
@@ -65,44 +70,144 @@
               </div>
             </div>
             `
-        }
-
-        function renderForecasts(locationName, forecasts) {
-            var postHtml = ' ';
-            for (let forecast of forecasts) {
-                postHtml += forecastBuilder(locationName, forecast)
             }
-            $('#currentWeather').html(postHtml);
-            $('#location').html(`${locationName} Weather`);
-            $('#mapHeading').html(`${locationName} Map`);
-        }
-        function mapCoords(lon, lat){
-            var longitude = `${lon}`;
-            var latitude = `${lat}`
-            var lonLat = [longitude, latitude];
-            return lonLat
-        }
 
-        $.get("http://api.openweathermap.org/data/2.5/forecast", {
-            APPID: OPEN_WEATHER_APPID,
-            q:     "San Antonio, US",
-            units: "imperial",
-            cnt: 5
-        }).done(function (data) {
-            console.log(data);
-            console.log(data.list);
-            renderForecasts(data.city.name, data.list);
+            function renderForecasts(locationName, forecasts) {
+                var postHtml = ' ';
+                for (let forecast of forecasts) {
+                    postHtml += forecastBuilder(locationName, forecast)
+                }
+                $('#currentWeather').html(postHtml);
+                $('#location').html(`${locationName} Weather`);
+                $('#mapHeading').html(`${locationName} Map`);
+            }
 
-            mapboxgl.accessToken = MAPBOX_TOKEN;
-            var mapCoordinates = mapCoords(data.city.coord.lon, data.city.coord.lat);
-            var map = new mapboxgl.Map({
-                container: 'map', // container id
-                style: 'mapbox://styles/mapbox/streets-v11', // style URL
-                center: mapCoordinates, // starting position [lng, lat]
-                zoom: 9 // starting zoom
+            function mapCoords(lon, lat) {
+                var longitude = `${lon}`;
+                var latitude = `${lat}`
+                var lonLat = [longitude, latitude];
+                return lonLat
+            }
+
+            $.get("http://api.openweathermap.org/data/2.5/forecast", {
+                APPID: OPEN_WEATHER_APPID,
+                q: 'Houston, US',
+                units: "imperial",
+                cnt: 5
+            }).done(function (data) {
+                console.log(data);
+                console.log(data.list);
+                renderForecasts(data.city.name, data.list);
+                var mapCoordinates = mapCoords(data.city.coord.lon, data.city.coord.lat);
+                if(mapCoords())
+                mapboxgl.accessToken = MAPBOX_TOKEN;
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: mapCoordinates,
+                    zoom: 9
+                });
+
+                var geocoder = new MapboxGeocoder({
+                    accessToken: mapboxgl.accessToken,
+                    mapboxgl: mapboxgl
+                });
+
+                document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+                var canvas = map.getCanvasContainer();
+
+                var geojson = {
+                    'type': 'FeatureCollection',
+                    'features': [
+                        {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': mapCoordinates
+                            }
+                        }
+                    ]
+                };
+
+                function onMove(e) {
+                    var coords = e.lngLat;
+
+// Set a UI indicator for dragging.
+                    canvas.style.cursor = 'grabbing';
+
+// Update the Point feature in `geojson` coordinates
+// and call setData to the source layer `point` on it.
+                    geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
+                    map.getSource('point').setData(geojson);
+                }
+
+                function onUp(e) {
+                    var coords = e.lngLat;
+
+// Print the coordinates of where the point had
+// finished being dragged to on the map.
+                    coordinates.style.display = 'block';
+                    coordinates.innerHTML =
+                        'Longitude: ' + coords.lng + '<br />Latitude: ' + coords.lat;
+                    canvas.style.cursor = '';
+
+// Unbind mouse/touch events
+                    map.off('mousemove', onMove);
+                    map.off('touchmove', onMove);
+                }
+
+                map.on('load', function () {
+// Add a single point to the map
+                    map.addSource('point', {
+                        'type': 'geojson',
+                        'data': geojson
+                    });
+
+                    map.addLayer({
+                        'id': 'point',
+                        'type': 'circle',
+                        'source': 'point',
+                        'paint': {
+                            'circle-radius': 10,
+                            'circle-color': '#3887be'
+                        }
+                    });
+
+// When the cursor enters a feature in the point layer, prepare for dragging.
+                    map.on('mouseenter', 'point', function () {
+                        map.setPaintProperty('point', 'circle-color', '#3bb2d0');
+                        canvas.style.cursor = 'move';
+                    });
+
+                    map.on('mouseleave', 'point', function () {
+                        map.setPaintProperty('point', 'circle-color', '#3887be');
+                        canvas.style.cursor = '';
+                    });
+
+                    map.on('mousedown', 'point', function (e) {
+// Prevent the default map drag behavior.
+                        e.preventDefault();
+
+                        canvas.style.cursor = 'grab';
+
+                        map.on('mousemove', onMove);
+                        map.once('mouseup', onUp);
+                    });
+
+                    map.on('touchstart', 'point', function (e) {
+                        if (e.points.length !== 1) return;
+
+// Prevent the default map drag behavior.
+                        e.preventDefault();
+
+                        map.on('touchmove', onMove);
+                        map.once('touchend', onUp);
+                    });
+                });
             });
-        });
 
+        });
     })();
 </script>
 

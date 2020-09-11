@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf8">
+</head>
+<body>
+<input id="B" value="I'm so fancy">
+<button id="fancyB">Hello Test Taker!</button>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="js/jquery-2.2.4.js"></script>
+<script type="text/javascript">
+    "use strict"
+
+    $('#fancyB').hover(
+        function() {
+            $(this).css('background-color', 'papayawhip');
+        },
+        function() {
+            $(this).css('background-color', '#FFF');
+        }
+        );
+</script>
+</body>
+</html>
