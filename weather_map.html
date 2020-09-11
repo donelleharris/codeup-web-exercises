@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather Map Project</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
     <style>
         #map {
             height: 400px;
@@ -14,6 +14,9 @@
         }
         p {
             font-size: 10px;
+        }
+        .card-header {
+            font-size: 15px;
         }
     </style>
 </head>
@@ -23,7 +26,7 @@
         <h4 id="location" class="text-light font-weight-lighter"></h4>
         <div id="currentWeather" class="d-flex"></div>
         <hr>
-        <h4 class="text-light font-weight-lighter">Current Weather Map</h4>
+        <h4 id="mapHeading" class="text-light font-weight-lighter"></h4>
         <div id="map" class=""></div>
     </div>
 
@@ -34,11 +37,13 @@
         'use strict';
 
         function forecastBuilder (locationName, forecast){
-            const {clouds, dt, main, pop, rain, sys, visibility, weather, wind} = forecast;
-
+            const {dt, main, weather, wind} = forecast;
+            var dateTime = new Date(`${dt}`*1000);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var formatted = dateTime.toLocaleDateString('en-US', options);
             return `
             <div class="card bg-light mb-3 mx-1 text-center flex-column" style="max-width: 18rem;">
-              <div class="card-header">${dt}</div>
+              <div class="card-header">${formatted}</div>
               <div class="card-body">
                 <div>
                     <p>High / Temp</p>
@@ -68,28 +73,15 @@
                 postHtml += forecastBuilder(locationName, forecast)
             }
             $('#currentWeather').html(postHtml);
-            $('#location').html(`${locationName} Weather`)
+            $('#location').html(`${locationName} Weather`);
+            $('#mapHeading').html(`${locationName} Map`);
         }
-
-        mapboxgl.accessToken = MAPBOX_TOKEN;
-
-        var map = new mapboxgl.Map({
-            container: 'map', // container id
-            style: 'mapbox://styles/mapbox/streets-v11', // style URL
-            center: [-98.4936, 29.4241], // starting position [lng, lat]
-            zoom: 9 // starting zoom
-        });
-        /*
-        Parameters Description
-        {layer} layer name
-        {z} number of zoom level
-        {x} number of x tile coordinate
-        {y} number of y tile coordinate
-        {api_key} Your API key
-         */
-
-        /*https://tile.openweathermap.org/map/{layer}/{9}/{${data.city.coord.lon}}/{${data.city.coord.lat}}.png?appid={OPEN_WEATHER_APPID}*/
-
+        function mapCoords(lon, lat){
+            var longitude = `${lon}`;
+            var latitude = `${lat}`
+            var lonLat = [longitude, latitude];
+            return lonLat
+        }
 
         $.get("http://api.openweathermap.org/data/2.5/forecast", {
             APPID: OPEN_WEATHER_APPID,
@@ -100,6 +92,15 @@
             console.log(data);
             console.log(data.list);
             renderForecasts(data.city.name, data.list);
+
+            mapboxgl.accessToken = MAPBOX_TOKEN;
+            var mapCoordinates = mapCoords(data.city.coord.lon, data.city.coord.lat);
+            var map = new mapboxgl.Map({
+                container: 'map', // container id
+                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                center: mapCoordinates, // starting position [lng, lat]
+                zoom: 9 // starting zoom
+            });
         });
 
     })();
