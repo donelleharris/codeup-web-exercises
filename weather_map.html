@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/weather_map.css">
 </head>
 <body class="bg-dark">
-    <div class="my-4 py-2 bg-primary d-flex justify-content-between align-items-center">
+    <div class="my-4 px-5 py-3 bg-primary d-flex justify-content-between align-items-center">
         <h1 class="">Weather App</h1>
         <div id="geocoder" class="geocoder "></div>
     </div>
@@ -30,7 +30,7 @@
         <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
         <div id="map"></div>
-        <pre id="coordinates" class="coordinates"></pre>
+        <pre id="coordinates" class="coordinates "></pre>
 
 
     </div>
@@ -74,8 +74,8 @@
 
             function renderForecasts(locationName, forecasts) {
                 var postHtml = ' ';
-                for (let forecast of forecasts) {
-                    postHtml += forecastBuilder(locationName, forecast)
+                for (let i = 0; i < forecasts.length; i += 8) {
+                    postHtml += forecastBuilder(locationName, forecasts[i])
                 }
                 $('#currentWeather').html(postHtml);
                 $('#location').html(`${locationName} Weather`);
@@ -93,7 +93,6 @@
                 APPID: OPEN_WEATHER_APPID,
                 q: 'Houston, US',
                 units: "imperial",
-                cnt: 5
             }).done(function (data) {
                 console.log(data);
                 console.log(data.list);
