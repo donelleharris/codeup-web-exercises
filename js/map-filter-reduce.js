@@ -74,10 +74,11 @@ const users = [
     console.log(unique);
 
     //My solution:
-    const allLanguages = users.reduce(function (langList, {languages}){
-        return `${langList + languages},`
-        }, '').split(',').slice(0, -1)
+    // const allLanguages = users.reduce(function (langList, {languages}){
+    //     return `${langList + languages},`
+    //     }, '').split(',').slice(0, -1)
+    //
+    // let uniqueLanguages = new Set(allLanguages);
+    // console.log(uniqueLanguages);
 
-    let uniqueLanguages = new Set(allLanguages);
-    console.log(uniqueLanguages);
 }
